@@ -1,1 +1,1 @@
-# coastal water monitoring system 
+# Coastal Water Monitoring System 
