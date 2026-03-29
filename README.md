@@ -103,58 +103,6 @@ coastalwatch/
 ├── requirements.txt
 └── README.md
 
-
-each file explaination:
-app.py
-  └── sets page config, loads CSS, shows landing/welcome screen
-
-pages/01_upload.py
-  └── file uploader + generate sample button
-  └── calls core/processor.py → stores result in session state via core/state.py
-
-pages/02_map.py
-  └── reads session state
-  └── calls core/processor.py for location summaries
-  └── uses st.map() or pydeck for markers
-
-pages/03_analytics.py
-  └── reads session state
-  └── location dropdown → calls core/processor.py
-  └── calls core/classifier.py for badge
-  └── renders components/metric_row, quality_badge, summary_table
-  └── renders st.line_chart and st.bar_chart
-
-pages/04_predictions.py
-  └── reads session state
-  └── location dropdown → calls core/predictor.py
-  └── calls core/classifier.py on predicted values
-  └── renders forecast line chart with historical + dashed forecast
-
-core/state.py
-  └── get_df() / set_df() wrappers around st.session_state
-  └── single source of truth for the loaded DataFrame
-
-core/processor.py
-  └── parse_csv(bytes) → DataFrame
-  └── generate_sample_data() → DataFrame
-  └── get_stats(df, location) → dict
-  └── get_location_summaries(df) → list
-
-core/classifier.py
-  └── classify(do, ph, sulphur, temp, turbidity) → {status, color, messages}
-
-core/predictor.py
-  └── predict(df, location) → {predictions, forecast_series}
-
-components/metric_row.py
-  └── render(stats) → 5 st.metric() calls in st.columns()
-
-components/quality_badge.py
-  └── render(classification) → st.success / st.warning / st.error
-
-components/summary_table.py
-  └── render(stats) → st.dataframe() formatted table
-
 ________________________________________________________________________________________________________________________________________________
 
 #### Usage Guide
